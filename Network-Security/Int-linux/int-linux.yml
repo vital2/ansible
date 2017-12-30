@@ -1,0 +1,52 @@
+---
+- hosts: Network-Security
+  become: true
+  tasks:
+    - name: Update the system
+      apt:
+        update_cache: yes
+    - name: Install Packages
+      apt:
+        pkg: "{{ item }}"
+        state: present
+      with_items:
+        - wireshark
+        - scapy
+        - iptables
+        - ebtables
+        - ufw
+        - nmap
+        - quagga
+        - isc-dhcp-server
+        - snmp
+        - mysql-server
+        - mysql-client
+        - ntp
+        - psad
+        - bind9 
+        - bind9utils 
+        - bind9-doc
+        - mate-desktop-environment-extras 
+        - mate-themes
+        - lightdm 
+        - lightdm-gtk-greeter 
+        - ubuntu-artwork 
+        - update-manager
+
+    #- name: Install snort and fwsnort
+    #  shell: "{{ item }}" 
+    #  with_items:
+    #    - DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server ethtool build-essential libpcap-dev libpcre3-dev libdumbnet-dev bison flex zlib1g-dev liblzma-dev openssl libssl-dev snort fwsnort
+
+    - name: Copy Configuration files
+      copy:
+        src: /home/abhishek/ansible/NetSec/Ext-router/configuration-files/
+        dest: /etc/
+
+    - name: Copy Lightdm Configuration files
+      copy:
+        src: /home/abhishek/ansible/NetSec/Ext-router/lightdm/
+        dest: /etc/lightdm/
+
+    - name: Disable lightdm
+      shell: systemctl disable lightdm.service

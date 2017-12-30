@@ -1,0 +1,21 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+auto lo
+iface lo inet loopback
+
+allow-hotplug eth0
+iface eth0 inet static
+	address 10.10.111.2
+	netmask 255.255.255.0
+	network 10.10.111.0
+	broadcast 10.10.111.255
+	gateway 10.10.111.1
+	dns-nameservers 10.10.111.1
+
+allow-hotplug eth1
+iface eth1 inet static
+	address 10.20.111.1
+	netmask 255.255.255.0
+	network 10.20.111.0
+	broadcast 10.20.111.255
+	gateway 10.10.111.1
+	dns-nameservers 10.10.111.1
