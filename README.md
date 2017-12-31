@@ -130,7 +130,7 @@ Now check if you are able to ping the remote host.
 output 
 
 ```ansible -m ping prod
-Computer-Netwroks | SUCCESS => {
+Computer-Networks | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
