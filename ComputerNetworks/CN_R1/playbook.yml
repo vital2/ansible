@@ -36,13 +36,13 @@
 
     - name: Copy Configuration files
       copy:
-        src: /home/abhishek/ansible/ComputerNetworks/CN_R1/configuration-files/
+        src: ~/ansible/ComputerNetworks/CN_R1/configuration-files/
         dest: /etc/
 
 
     - name: Copy Lightdm Configuration files
       copy:
-        src: /home/abhishek/ansible/ComputerNetworks/CN_R1/lightdm/
+        src: ~/ansible/ComputerNetworks/CN_R1/lightdm/
         dest: /etc/lightdm/
 
     - name: Disable lightdm

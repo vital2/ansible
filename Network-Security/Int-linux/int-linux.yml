@@ -40,12 +40,12 @@
 
     - name: Copy Configuration files
       copy:
-        src: /home/abhishek/ansible/NetSec/Ext-router/configuration-files/
+        src: ~/ansible/NetSec/Int-Linux/configuration-files/
         dest: /etc/
 
     - name: Copy Lightdm Configuration files
       copy:
-        src: /home/abhishek/ansible/NetSec/Ext-router/lightdm/
+        src: ~/ansible/NetSec/Int-Linux/lightdm/
         dest: /etc/lightdm/
 
     - name: Disable lightdm
