@@ -1,7 +1,7 @@
 ---
-- hosts: Computer-Networks          
+- hosts: Computer-Networks
   become: yes
-  tasks:  
+  tasks:
     - name: Install Software for Computer Networks Lab
       apt:
         pkg: "{{ item }}"
@@ -22,28 +22,42 @@
         - echoping
         - tftp
         - telnet
-        - mate-desktop-environment-extras 
+        - mate-desktop-environment-extras
         - mate-themes
-        - lightdm 
-        - lightdm-gtk-greeter 
-        - ubuntu-artwork 
+        - lightdm
+        - lightdm-gtk-greeter
+        - ubuntu-artwork
         - update-manager
+        - traceroute
+        - tree
+        - snmp
+        - psad
+        - quagga-doc
 
-    #- name: Install snort and fwsnort
-    #  shell: "{{ item }}" 
-    #  with_items:
-    #    - DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server ethtool build-essential libpcap-dev libpcre3-dev libdumbnet-dev bison flex zlib1g-dev liblzma-dev openssl libssl-dev snort fwsnort
 
     - name: Copy Configuration files
       copy:
         src: ~/ansible/Computer-Networks/Ubuntu/configuration-files/
         dest: /etc/
 
+    - name: Copy installation script
+      copy:
+        src: ~/ansible/Computer-Networks/Ubuntu/installation.sh
+        dest: /tmp/
+
+    - name: Run the script
+      shell: sh /tmp/installation.sh
 
     - name: Copy Lightdm Configuration files
       copy:
         src: ~/ansible/Computer-Networks/Ubuntu/lightdm/
         dest: /etc/lightdm/
 
-    - name: Disable lightdm
-      shell: systemctl disable lightdm.service
+    - name: Enable lightdm
+      shell: "{{ item }}"
+      with_items:
+        - ln -s /lib/systemd/system/lightdm.service /etc/systemd/systemd/display-manager.service
+        - systemctl disable lightdm.service
+
+    - name: Disable dhcpd
+      shell: systemctl disable isc-dhcp-server

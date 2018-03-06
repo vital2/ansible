@@ -23,31 +23,41 @@
         - mysql-client
         - ntp
         - psad
-        - bind9 
-        - bind9utils 
+        - bind9
+        - bind9utils
         - bind9-doc
-        - mate-desktop-environment-extras 
+        - mate-desktop-environment-extras
         - mate-themes
-        - lightdm 
-        - lightdm-gtk-greeter 
-        - ubuntu-artwork 
+        - lightdm
+        - lightdm-gtk-greeter
+        - ubuntu-artwork
         - update-manager
-
-    #- name: Install snort and fwsnort
-    #  shell: "{{ item }}" 
-    #  with_items:
-    #    - DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server ethtool build-essential libpcap-dev libpcre3-dev libdumbnet-dev bison flex zlib1g-dev liblzma-dev openssl libssl-dev snort fwsnort
+        - traceroute
+        - tree
 
     - name: Copy Configuration files
       copy:
         src: ~/ansible/NetSec/Int-router/configuration-files/
         dest: /etc/
 
+    - name: Copy installation.sh file
+      copy:
+        src: ~/ansible/NetSec/Int-router/installation.sh
+        dest: /tmp/
+
+    - name: Run installation.sh
+      shell: sh /tmp/installation.sh
 
     - name: Copy Lightdm Configuration files
       copy:
         src: ~/ansible/NetSec/Int-router/lightdm/
         dest: /etc/lightdm/
 
-    - name: Disable lightdm
-      shell: systemctl disable lightdm.service
+    - name: Enable lightdm
+      shell: "{{ item }}"
+      with_items:
+        - ln -s /lib/systemd/system/lightdm.service /etc/systemd/systemd/display-manager.service
+        - systemctl enable lightdm.service
+
+    - name: Enable dhcpd
+      shell: systemctl enable isc-dhcp-server
