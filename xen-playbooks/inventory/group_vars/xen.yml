@@ -1,0 +1,3 @@
+---
+xen:
+  location: "$HOME/xen"

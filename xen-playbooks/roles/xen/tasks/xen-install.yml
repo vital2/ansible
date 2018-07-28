@@ -1,0 +1,60 @@
+---
+- name: Download source
+  git:
+    repo: "https://github.com/xen-project/xen.git"
+    dest: "{{ xen.location }}" 
+    version: stable-4.11  
+
+- name: Run ./configure, make world and make install
+  block:
+    - shell: ./configure --enable-systemd --with-xenstored=xenstored --libdir=/usr/lib
+      args:
+        chdir: /home/abhishek/xen
+      
+    - name: make dist
+      make:
+        chdir: /home/abhishek/xen
+        target: dist
+      
+    - name: make tools
+      make:
+        chdir: /home/abhishek/xen
+        target: tools
+
+    - name: make stubodm
+      make:
+        chdir: /home/abhishek/xen
+        target: stubdom
+
+    - name: make install-xen
+      make:
+        chdir: /home/abhishek/xen
+        target: install-xen
+
+    - name: make install-tools
+      make:
+        chdir: /home/abhishek/xen
+        target: install-tools 
+        params:
+          PYTHON_PREFIX_ARG: ""
+
+    - name: make install-stubdom
+      make:
+        chdir: /home/abhishek/xen
+        target: install-stubdom
+
+    - command: "{{ item }}"
+      with_items:
+        - update-rc.d xencommons defaults 19 18
+        - update-rc.d xendomains defaults 21 20
+        - update-rc.d xen-watchdog defaults 22 23
+
+    - shell: update-grub
+      notify:
+        - xen-qemu-dom0-disk-backend
+        - xen-init-dom0
+        - xenconsoled
+        - xendomains
+        - xen-watchdog
+        - xen-commons
+  become: true

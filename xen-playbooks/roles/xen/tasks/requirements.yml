@@ -1,0 +1,85 @@
+---
+- name: Update system, install xen-dep and required packages
+  block:
+    - apt: 
+        update_cache: yes
+
+    - apt:
+        pkg: xen
+        state: build-dep
+
+    - shell: apt-get update -y
+
+    - apt:
+        pkg: "{{ item }}"
+        state: present
+      with_items:
+        - bcc
+        - bin86
+        - gawk 
+        - bridge-utils 
+        - iproute2 
+        - bzip2 
+        - module-init-tools 
+        - transfig 
+        - tgif
+        - texinfo 
+        - texlive-latex-base 
+        - texlive-latex-recommended 
+        - texlive-fonts-extra 
+        - texlive-fonts-recommended 
+        - pciutils-dev 
+        - mercurial
+        - make 
+        - gcc 
+        - libc6-dev 
+        - zlib1g-dev 
+        - python 
+        - python-dev 
+        - python-twisted 
+        - libncurses5-dev 
+        - patch 
+        - libvncserver-dev 
+        - libsdl-dev 
+        - libjpeg8-dev
+        - libnl-route-3-200
+        - libnl-cli-3-dev
+        - libnl-3-dev
+        - iasl 
+        - libbz2-dev 
+        - e2fslibs-dev 
+        - git-core 
+        - uuid-dev 
+        - ocaml 
+        - ocaml-findlib 
+        - libx11-dev 
+        - bison 
+        - flex 
+        - xz-utils 
+        - libyajl-dev
+        - gettext 
+        - libpixman-1-dev 
+        - libaio-dev 
+        - markdown 
+        - pandoc
+        - libjpeg-dev
+        - libsystemd-dev
+        - libsystemd0
+        - systemd
+        - systemd-tests
+        - build-essential
+        - bcc
+        - liblzma-dev
+        - python-dev
+        - gettext
+        - iasl
+        - uuid-dev
+        - libncurses5-dev 
+        - libncursesw5-dev
+        - pkg-config
+        - libgtk2.0-dev
+        - libgtk2.0-dev
+        - libyajl-dev
+        - gcc-multilib 
+        - g++-multilib   
+  become: true      

@@ -1,0 +1,6 @@
+---
+- hosts: xen
+#  become: true
+  gather_facts: no
+  roles:
+    - xen
