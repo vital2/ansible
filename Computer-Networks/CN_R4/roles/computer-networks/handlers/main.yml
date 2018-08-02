@@ -1,0 +1,7 @@
+---
+- name: Disable lightdm
+  service:
+    name: lightdm.service
+    enabled: no
+    state: stopped
+  become: true
