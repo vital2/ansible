@@ -1,0 +1,44 @@
+---
+- name: Copy files
+  block:
+    - name: copy configuration files
+      copy:
+        src: bind
+        dest: /etc/
+
+    - name: copy dhcp files
+      copy:
+        src: dhcp
+        dest: /etc/
+
+    - name: copy host.conf file
+      copy:
+        src: host.conf
+        dest: /etc/
+
+    - name: copy hostname file
+      copy:
+        src: hostname
+        dest: /etc/
+
+    - name: copy hosts file
+      copy:
+        src: hosts
+        dest: /etc/
+
+    - name: copy resolv.conf file
+      copy:
+        src: resolv.conf
+        dest: /etc/
+
+    - name: copy network files
+      copy:
+        src: network
+        dest: /etc/
+
+    - name: Copy Lightdm Configuration files
+      copy:
+        src: lightdm
+        dest: /etc/lightdm/
+
+  become: true
