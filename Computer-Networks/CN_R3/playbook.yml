@@ -1,5 +1,0 @@
----
-- hosts: cn-r3
-  gather_facts: no
-  roles:
-    - computer-networks

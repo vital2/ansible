@@ -5,12 +5,6 @@
         update_cache: yes
 
     - apt:
-        pkg: xen
-        state: build-dep
-
-    - shell: apt-get update -y
-
-    - apt:
         pkg: "{{ item }}"
         state: present
       with_items:
@@ -77,7 +71,6 @@
         - libncurses5-dev 
         - libncursesw5-dev
         - pkg-config
-        - libgtk2.0-dev
         - libgtk2.0-dev
         - libyajl-dev
         - gcc-multilib 

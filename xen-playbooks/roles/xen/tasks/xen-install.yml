@@ -6,6 +6,7 @@
     version: stable-4.11  
 
 - name: Run ./configure, make world and make install
+  become_user: "{{ xen.user }}" 
   block:
     - shell: ./configure --enable-systemd --with-xenstored=xenstored --libdir=/usr/lib
       args:
@@ -13,35 +14,25 @@
       
     - name: make dist
       make:
-        chdir: /home/abhishek/xen
+        chdir: "{{ xen.location }}" 
         target: dist
       
     - name: make tools
       make:
-        chdir: /home/abhishek/xen
+        chdir: "{{ xen.location }}" 
         target: tools
-
-    - name: make stubodm
-      make:
-        chdir: /home/abhishek/xen
-        target: stubdom
 
     - name: make install-xen
       make:
-        chdir: /home/abhishek/xen
+        chdir: "{{ xen.location }}" 
         target: install-xen
 
     - name: make install-tools
       make:
-        chdir: /home/abhishek/xen
+        chdir: "{{ xen.location }}" 
         target: install-tools 
         params:
           PYTHON_PREFIX_ARG: ""
-
-    - name: make install-stubdom
-      make:
-        chdir: /home/abhishek/xen
-        target: install-stubdom
 
     - command: "{{ item }}"
       with_items:
@@ -49,7 +40,14 @@
         - update-rc.d xendomains defaults 21 20
         - update-rc.d xen-watchdog defaults 22 23
 
-    - shell: update-grub
+    - shell: update-grub 
+
+    - shell: /sbin/ldconfig
+
+    - copy:
+        src: xen.cfg
+        dest: etc/default/grub.d/
+
       notify:
         - xen-qemu-dom0-disk-backend
         - xen-init-dom0
