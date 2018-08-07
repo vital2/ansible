@@ -1,70 +1,49 @@
 ---
-- name: Download source of frr
-  git:
-    repo: "https://github.com/FRRouting/frr.git"
-    dest: "{{ frr.location }}"
-    version: stable/5.0
-  
-- name: Update system, install xen-dep and required packages
+- name: Update system and required packages
   block:
 #    - apt: 
 #        update_cache: yes
-#
-#    - apt:
-#        pkg: xen
-#        state: build-dep
-#
-#    - shell: apt-get update -y
-#
-#    - name: Install Software for Computer Networks Lab
-#      apt:
-#        pkg: "{{ item }}"
-#        state: present
-#      with_items:
-#        - scapy
-#        - autoconf 
-#        - automake 
-#        - autotools-dev 
-#        - libtool 
-#        - pkg-config
-#        - libjson-c-dev
-#        - libpython-dev
-#        - libreadline-dev
-#        - libc-ares-dev
-#        - bison
-#        - python-sphinx
-#        - iptables
-#        - texinfo
-#        - install-info
-#        - wireshark
-#        - ebtables
-#        - ufw
-#        - nmap
-#        - quagga
-#        - ftp
-#        - isc-dhcp-server
-#        - ntp
-#        - iperf
-#        - iperf3
-#        - echoping
-#        - tftp
-#        - telnet
-#        - mate-desktop-environment-extras 
-#        - mate-themes
-#        - lightdm 
-#        - lightdm-gtk-greeter 
-#        - ubuntu-artwork 
-#        - update-manager
-#
-#      notify: Disable lightdm
 
-    - name: Run bootstrap.sh
-      shell: ./bootstrap.sh
-      args:
-        chdir: /home/abhishek/frr
+    - name: Install Software for Computer Networks Lab
+      apt:
+        pkg: "{{ item }}"
+        state: present
+      with_items:
+        - scapy
+        - autoconf 
+        - automake 
+        - autotools-dev 
+        - libtool 
+        - pkg-config
+        - libjson-c-dev
+        - flex
+        - libpython-dev
+        - libreadline-dev
+        - libc-ares-dev
+        - bison
+        - python-sphinx
+        - iptables
+        - texinfo
+        - install-info
+        - wireshark
+        - ebtables
+        - ufw
+        - nmap
+        - quagga
+        - ftp
+        - isc-dhcp-server
+        - ntp
+        - iperf
+        - iperf3
+        - echoping
+        - tftp
+        - telnet
+        - mate-desktop-environment-extras 
+        - mate-themes
+        - lightdm 
+        - lightdm-gtk-greeter 
+        - ubuntu-artwork 
+        - update-manager
 
-    - name: Run configure file
-      shell: ./configure
-      args:
-        chdir: /home/abhishek/frr 
+      notify: Disable lightdm
   become: true        
