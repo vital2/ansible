@@ -1,30 +1,49 @@
 ---
- - name: Install Software for Computer Networks Lab
-   apt:
-     pkg: "{{ item }}"
-     state: present
-   with_items:
-     - scapy
-     - iptables
-     - wireshark
-     - ebtables
-     - ufw
-     - nmap
-     - quagga
-     - ftp
-     - isc-dhcp-server
-     - ntp
-     - iperf
-     - iperf3
-     - echoping
-     - tftp
-     - telnet
-     - mate-desktop-environment-extras 
-     - mate-themes
-     - lightdm 
-     - lightdm-gtk-greeter 
-     - ubuntu-artwork 
-     - update-manager
+- name: Update system and required packages
+  block:
+#    - apt: 
+#        update_cache: yes
 
-   notify: Disable lightdm
-   become: true  
+    - name: Install Software for Computer Networks Lab
+      apt:
+        pkg: "{{ item }}"
+        state: present
+      with_items:
+        - scapy
+        - autoconf 
+        - automake 
+        - autotools-dev 
+        - libtool 
+        - pkg-config
+        - libjson-c-dev
+        - flex
+        - libpython-dev
+        - libreadline-dev
+        - libc-ares-dev
+        - bison
+        - python-sphinx
+        - iptables
+        - texinfo
+        - install-info
+        - wireshark
+        - ebtables
+        - ufw
+        - nmap
+        - quagga
+        - ftp
+        - isc-dhcp-server
+        - ntp
+        - iperf
+        - iperf3
+        - echoping
+        - tftp
+        - telnet
+        - mate-desktop-environment-extras 
+        - mate-themes
+        - lightdm 
+        - lightdm-gtk-greeter 
+        - ubuntu-artwork 
+        - update-manager
+
+      notify: Disable lightdm
+  become: true        
