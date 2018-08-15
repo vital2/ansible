@@ -1,0 +1,17 @@
+---
+- name: Start Services
+  block:
+    - name: Disable lightdm
+      service:
+        name: lightdm.service
+        enabled: no
+        state: stopped
+
+    - name: frr
+      service:
+        name: frr
+        enabled: yes
+        state: started
+  become: true
+
+
