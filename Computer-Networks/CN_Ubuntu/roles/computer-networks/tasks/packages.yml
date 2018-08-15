@@ -1,8 +1,8 @@
 ---
 - name: Update system and required packages
   block:
-#    - apt: 
-#        update_cache: yes
+    - apt: 
+        update_cache: yes
 
     - name: Install Software for Computer Networks Lab
       apt:
@@ -29,10 +29,10 @@
         - ebtables
         - ufw
         - nmap
-        - quagga
         - ftp
         - isc-dhcp-server
         - ntp
+        - vim
         - iperf
         - iperf3
         - echoping
@@ -42,8 +42,28 @@
         - mate-themes
         - lightdm 
         - lightdm-gtk-greeter 
-        - ubuntu-artwork 
         - update-manager
+        - git
+        - autoconf
+        - automake
+        - libtool
+        - make
+        - gawk
+        - libreadline-dev 
+        - texinfo 
+        - dejagnu
+        - pkg-config 
+        - libpam0g-dev 
+        - libjson-c-dev 
+        - bison 
+        - flex 
+        - python-pytest
+        - libc-ares-dev 
+        - python3-dev 
+        - libsystemd-dev 
+        - python-ipaddr 
+        - python3-sphinx
+        - install-info
 
       notify: Disable lightdm
   become: true        
