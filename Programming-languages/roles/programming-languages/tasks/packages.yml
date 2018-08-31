@@ -1,0 +1,71 @@
+- name: Update system and required packages
+  become: true
+  block:
+    - apt: 
+        update_cache: yes
+
+    - name: Install Packages for PL
+      apt:
+        pkg: "{{ item }}"
+        state: present
+      with_items:
+        - lxde
+        - lxde-common
+        - lxsession-logout
+        - ocaml-nox
+        - ocaml
+        - clisp 
+        - cl-closr-mop 
+        - cl-launcher 
+        - clisp-doc 
+        - clisp-dev
+        - php 
+        - php-doc 
+        - php-dev
+        - ruby
+        - ruby-dev
+        - julia 
+        - julia-doc 
+        - julia-common 
+        - flex 
+        - flex-doc 
+        - libel-dev
+        - bison 
+        - bison-doc 
+        - libbison-dev
+        - golang 
+        - golang-doc
+        - fortran 
+        - fortran-doc 
+        - fortran-multilib
+        - python3 
+        - python3-doc 
+        - python3-dev 
+        - idle3 
+        - python3-stdlib
+        - swi-proglog 
+        - swi-prolog-doc
+        - mit-scheme 
+        - mictscheme-doc 
+        - mit-scheme-dbg
+        - ghc 
+        - ghc-doc 
+        - ghc-prof 
+        - ghc-mod-el 
+        - haskell-doc 
+        - haskell98-report 
+        - haskell98-tutorial 
+        - hugs
+        - clojure1.6
+        - smlnj 
+        - smmlnj-doc 
+        - smlnj-runtime
+        - aspectj 
+        - aspectj-doc 
+        - aspectc++
+
+    - name: Purge Openbox
+      apt:
+        pkg: openbox
+        state: absent
+        purge: yes
