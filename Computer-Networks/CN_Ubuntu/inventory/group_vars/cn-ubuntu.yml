@@ -1,4 +1,4 @@
 ---
 frr:
   location: "$HOME/frr"
-  user: "< >"
+  user: "student"

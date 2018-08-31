@@ -1,7 +1,17 @@
 ---
-- name: Disable lightdm
-  service:
-    name: lightdm.service
-    enabled: no
-    state: stopped
+- name: Start Services
+  block:
+    - name: Enable lightdm
+      service:
+        name: lightdm.service
+        enabled: yes
+        state: started
+
+    - name: frr
+      service:
+        name: frr
+        enabled: yes
+        state: started
   become: true
+
+

@@ -1,2 +1,2 @@
 [cn-ubuntu]
-localhost
+128.238.77.60 ansible_user=student

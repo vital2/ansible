@@ -15,7 +15,6 @@
         - autotools-dev 
         - libtool 
         - pkg-config
-        - tree  
         - libjson-c-dev
         - flex
         - libpython-dev
@@ -66,5 +65,5 @@
         - python3-sphinx
         - install-info
 
-      notify: Enable lightdm
+      notify: Disable lightdm
   become: true        
