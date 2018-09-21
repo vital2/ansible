@@ -43,6 +43,11 @@
         src: ~/ansible/NetSec/Int-router/configuration-files/
         dest: /etc/
 
+    - replace:
+        path: /etc/sysctl.conf
+        regexp: '#net\.ipv4\.ip_forward=1'
+        replace: 'net.ipv4.ip_forward=1'
+        backup: yes
 
     - name: Copy Lightdm Configuration files
       copy:
