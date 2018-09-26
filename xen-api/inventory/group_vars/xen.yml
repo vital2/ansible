@@ -1,0 +1,4 @@
+---
+xenapi:
+  location: "$HOME"
+  user: "vital"
