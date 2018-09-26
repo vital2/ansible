@@ -1,4 +1,4 @@
 ---
 xen:
   location: "$HOME/xen"
-  user: "abhishek"
+  user: "root"
