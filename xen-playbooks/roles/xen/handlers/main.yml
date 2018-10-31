@@ -19,6 +19,12 @@
         state: started
         enabled: yes
 
+    - name: xenstored
+      service:
+        name: xenstored 
+        state: started
+        enabled: yes
+
     - name: xendomains
       service:
         name: xendomains
@@ -28,12 +34,6 @@
     - name: xen-watchdog
       service:
         name: xen-watchdog
-        state: started
-        enabled: yes
-
-    - name: xen-commons
-      service:
-        name: xencommons 
         state: started
         enabled: yes
   become: true  

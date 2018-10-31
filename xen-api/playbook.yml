@@ -1,0 +1,5 @@
+---
+- hosts: xen
+  gather_facts: no
+  roles:
+    - xenapi
