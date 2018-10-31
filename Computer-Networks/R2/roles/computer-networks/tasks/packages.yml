@@ -12,6 +12,7 @@
         - scapy
         - autoconf 
         - automake 
+        - traceroute
         - autotools-dev 
         - libtool 
         - pkg-config

@@ -15,6 +15,7 @@
         - autotools-dev 
         - libtool 
         - pkg-config
+        - traceroute
         - tree  
         - libjson-c-dev
         - flex
