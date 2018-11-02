@@ -23,6 +23,16 @@
         - virtualenv
         - virtualenvwrapper
 
+    - name: Ensure virtualenv is sourced from the .bashrc
+      blockinfile:
+        dest: ".bashrc"
+        block: |
+          export WORKON_HOME=~/.virtualenvs
+          source /usr/local/bin/virtualenvwrapper.sh
+        marker: '# {mark} ANSIBLE MANAGED BLOCK - virtualenv'
+        insertbefore: BOF
+        create: yes
+
     - name: Install requirements to virtual environment
       pip: 
         name: "{{ item }}"          
@@ -40,14 +50,14 @@
 
     - name: Create user
       user:
-       name: "{{ xen-api.user }}"
+       name: "{{ xenapi.user }}"
        password: '$6$RMpmFpfbGGlsGP$Wdh9tNI0LYc84KgNWx9XDG2eEiIodn4FOGbLmL7jczMeDeaRZHvVwSjtshd6/tf.J52n8fbf6qZYT076Z3Jpz1'
        groups: sudo
        state: present
        shell: /bin/bash
        system: no
        createhome: yes
-       home: "/home/{{ xen-api.user }}"
+       home: "/home/{{ xenapi.user }}"
     
     - name: Mount Gluster File System
       mount:

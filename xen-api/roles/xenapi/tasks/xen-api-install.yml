@@ -22,8 +22,8 @@
     - name: Download source
       git:
         repo: "https://github.com/vital2/xen-api"
-        dest: "{{ xenapi.location }}/xen-api"
-        version: spice-integration
+        dest: "{{ xenapi.location }}/xen-api/source"
+        version: dev
 
     - name: Changing perm of scripts folder, adding "+x"
       file: 
