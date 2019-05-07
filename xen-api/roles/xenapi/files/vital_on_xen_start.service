@@ -1,0 +1,10 @@
+[Unit]
+Description=vital course network start service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/vital/source/xen-api/scripts/on_xen_startup.sh
+
+[Install]
+WantedBy=multi-user.target

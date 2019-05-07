@@ -1,0 +1,9 @@
+[Unit]
+Description=vital start xen-api
+After=network.target
+
+[Service] 
+ExecStart=/root/.virtualenvs/vital/bin/python /home/vital/source/xen-api/xen_api_rpc.py
+
+[Install]
+WantedBy=multi-user.target
