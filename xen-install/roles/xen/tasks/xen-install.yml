@@ -1,0 +1,75 @@
+---
+- name: Download source
+  git:
+    repo: "https://github.com/xen-project/xen.git"
+    dest: "{{ xen.location }}" 
+    version: stable-4.11  
+
+- name: Run ./configure, make world and make install
+  become_user: "{{ xen.user }}" 
+  block:
+    - shell: ./configure --enable-systemd --with-xenstored=xenstored --libdir=/usr/lib
+      args:
+        chdir: "{{ xen.location }}"
+
+    - replace:
+        path: /root/xen/Config.mk
+        regexp: 'QEMU_UPSTREAM_URL \?= http:.*'
+        replace: 'QEMU_UPSTREAM_URL \?= https://github.com/qemu/qemu.git'
+        backup: yes
+
+    - replace:
+        path: /root/xen/Config.mk
+        regexp: 'QEMU_UPSTREAM_URL \?= git:.*'
+        replace: 'QEMU_UPSTREAM_URL = git://git.qemu.org/qemu.git'
+        backup: yes
+
+    - replace:
+        path: /root/xen/Config.mk
+        regexp: 'QEMU_UPSTREAM_REVISION \?= qemu-xen-4\.11\.0'
+        replace: 'QEMU_UPSTREAM_REVISION ?= v2.12.1'
+        backup: yes
+      
+    - name: make dist
+      make:
+        chdir: "{{ xen.location }}" 
+        target: dist
+      
+    - name: make tools
+      make:
+        chdir: "{{ xen.location }}" 
+        target: tools
+
+    - name: make install-xen
+      make:
+        chdir: "{{ xen.location }}" 
+        target: install-xen
+
+    - name: make install-tools
+      make:
+        chdir: "{{ xen.location }}" 
+        target: install-tools 
+        params:
+          PYTHON_PREFIX_ARG: ""
+
+    - shell: update-grub 
+
+    - shell: /sbin/ldconfig
+
+    - name: Create directory
+      file:
+        path: /etc/default/grub.d
+        state: directory
+
+    - copy:
+        src: xen.cfg
+        dest: /etc/default/grub.d/
+
+      notify:
+        - xen-qemu-dom0-disk-backend
+        - xen-init-dom0
+        - xenconsoled
+        - xenstored  
+        - xendomains
+        - xen-watchdog
+  become: true
