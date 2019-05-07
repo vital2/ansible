@@ -1,3 +1,0 @@
----
-- include_tasks: requirements.yml
-- include_tasks: xen-install.yml
