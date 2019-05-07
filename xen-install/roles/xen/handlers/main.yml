@@ -1,0 +1,39 @@
+---
+- name: start and enable xen services
+  block:
+    - name: xen-qemu-dom0-disk-backend
+      service:
+        name: xen-qemu-dom0-disk-backend
+        state: started
+        enabled: yes
+
+    - name: xen-init-dom0
+      service:
+        name: xen-init-dom0
+        state: started
+        enabled: yes
+
+    - name: xenconsoled
+      service:
+        name: xenconsoled
+        state: started
+        enabled: yes
+
+    - name: xenstored
+      service:
+        name: xenstored 
+        state: started
+        enabled: yes
+
+    - name: xendomains
+      service:
+        name: xendomains
+        state: started
+        enabled: yes
+
+    - name: xen-watchdog
+      service:
+        name: xen-watchdog
+        state: started
+        enabled: yes
+  become: true  
