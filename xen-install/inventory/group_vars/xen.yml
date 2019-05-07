@@ -1,0 +1,4 @@
+---
+xen:
+  location: "$HOME/xen"
+  user: "root"
