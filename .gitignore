@@ -1,1 +1,4 @@
 *.retry
+
+# IDE files
+.idea
