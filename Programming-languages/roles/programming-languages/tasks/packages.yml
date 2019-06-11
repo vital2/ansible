@@ -63,6 +63,15 @@
         - aspectj-doc 
         - aspectc++
 
+    - name: Install Rust
+      command: curl -sf -L https://static.rust-lang.org/rustup.sh | sh
+
+    - name: Install Pharo
+      command: wget -O - http://download.opensuse.org/repositories/devel:/languages:/pharo:/stable/xUbuntu_14.04/Release.key | apt-key add -
+      command: echo "deb http://download.opensuse.org/repositories/devel:/languages:/pharo:/stable/xUbuntu_14.04/ ./" > /etc/apt/sources.list.d/pharo.list
+      command: apt update
+      command: apt install pharo6-32-ui pharo6-64-ui
+
     - name: Purge Openbox
       apt:
         pkg: openbox
