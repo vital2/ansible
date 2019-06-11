@@ -54,8 +54,7 @@
         - ghc-mod-el 
         - haskell-doc 
         - haskell98-report 
-        - haskell98-tutorial 
-        - hugs
+        - haskell98-tutorial
         - clojure1.6
         - smlnj 
         - smlnj-doc 
