@@ -1,0 +1,5 @@
+---
+- hosts: Distributed-Systems
+  gather_facts: no
+  roles:
+    - distributed-systems
