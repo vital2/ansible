@@ -65,6 +65,9 @@
         - python-ipaddr 
         - python3-sphinx
         - install-info
+        - bind9
+        - dnsutils
+        - net-tools
 
       notify: Enable lightdm
   become: true        
