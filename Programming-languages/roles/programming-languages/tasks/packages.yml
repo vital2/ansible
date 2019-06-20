@@ -69,13 +69,13 @@
     - name: Install Pharo
       shell: curl -L https://get.pharo.org/64/ | bash
 
-    - name: Purge Openbox
-      apt:
-        pkg: openbox
-        state: absent
-        purge: yes
-
-    - name: Remove openbox.desktop file
-      file:
-         state: absent
-         path: /usr/share/xsessions/openbox.desktop    
+#    - name: Purge Openbox
+#      apt:
+#        pkg: openbox
+#        state: absent
+#        purge: yes
+#
+#    - name: Remove openbox.desktop file
+#      file:
+#         state: absent
+#         path: /usr/share/xsessions/openbox.desktop
