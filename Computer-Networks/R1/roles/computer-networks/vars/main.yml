@@ -1,0 +1,4 @@
+---
+frr:
+  location: "$HOME/frr"
+  user: "student"
