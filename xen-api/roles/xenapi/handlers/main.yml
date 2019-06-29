@@ -1,0 +1,13 @@
+- name: start and enable xen services
+  block:
+    - name: vital_on_xen_start
+      service:
+        name: vital_on_xen_start
+        state: started
+        enabled: yes
+
+    - name: vital_xen_api
+      service:
+        name: vital_xen_api
+        state: started
+        enabled: yes

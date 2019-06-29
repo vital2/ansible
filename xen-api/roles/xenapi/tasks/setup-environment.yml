@@ -15,6 +15,7 @@
         - glusterfs-client
         - python-pip
         - postgresql-client
+        - libpq-dev
 
     - name: Installing Python Packages to global packages
       pip: 
