@@ -3,7 +3,7 @@
   git:
     repo: "https://github.com/xen-project/xen.git"
     dest: "{{ xen.location }}" 
-    version: stable-4.11  
+    version: stable-4.12  
 
 - name: Run ./configure, make world and make install
   become_user: "{{ xen.user }}" 
@@ -12,23 +12,23 @@
       args:
         chdir: "{{ xen.location }}"
 
-    - replace:
-        path: /root/xen/Config.mk
-        regexp: 'QEMU_UPSTREAM_URL \?= http:.*'
-        replace: 'QEMU_UPSTREAM_URL \?= https://github.com/qemu/qemu.git'
-        backup: yes
+        #- replace:
+        #- repath: /root/xen/Config.mk
+        #- reregexp: 'QEMU_UPSTREAM_URL \?= http:.*'
+        #- rereplace: 'QEMU_UPSTREAM_URL \?= https://github.com/qemu/qemu.git'
+        #- rebackup: yes
 
-    - replace:
-        path: /root/xen/Config.mk
-        regexp: 'QEMU_UPSTREAM_URL \?= git:.*'
-        replace: 'QEMU_UPSTREAM_URL = git://git.qemu.org/qemu.git'
-        backup: yes
+        #- replace:
+        #- repath: /root/xen/Config.mk
+        #- reregexp: 'QEMU_UPSTREAM_URL \?= git:.*'
+        #- rereplace: 'QEMU_UPSTREAM_URL = git://git.qemu.org/qemu.git'
+        #- rebackup: yes
 
-    - replace:
-        path: /root/xen/Config.mk
-        regexp: 'QEMU_UPSTREAM_REVISION \?= qemu-xen-4\.11\.0'
-        replace: 'QEMU_UPSTREAM_REVISION ?= v2.12.1'
-        backup: yes
+        #- replace:
+        #- repath: /root/xen/Config.mk
+        #- reregexp: 'QEMU_UPSTREAM_REVISION \?= qemu-xen-4\.11\.0'
+        #- rereplace: 'QEMU_UPSTREAM_REVISION ?= v2.12.1'
+        #- rebackup: yes
       
     - name: make dist
       make:
@@ -52,8 +52,6 @@
         params:
           PYTHON_PREFIX_ARG: ""
 
-    - shell: update-grub 
-
     - shell: /sbin/ldconfig
 
     - name: Create directory
@@ -61,9 +59,15 @@
         path: /etc/default/grub.d
         state: directory
 
-    - copy:
+    - name: Copy Xen Config
+      copy:
         src: xen.cfg
         dest: /etc/default/grub.d/
+    
+    - shell: update-grub 
+
+    - name: Unconditionally reboot the machine with all defaults
+      reboot:
 
       notify:
         - xen-qemu-dom0-disk-backend

@@ -1,0 +1,37 @@
+---
+- name: Install Vital Source
+  become: yes
+  become_user: "{{ xenapi.user }}" 
+  block:
+    - name: Create log directory
+      file:
+        path: "{{ xenapi.location }}/log"
+        state: directory
+    
+    - name: Create Log File
+      copy:
+        content: ""
+        dest: "{{ xenapi.location }}/log/xen-api.log"
+        force: no
+    
+    - name: Create source directory
+      file:
+        path: "{{ xenapi.location }}/source"
+        state: directory
+
+    - name: Download source
+      git:
+        repo: "https://github.com/vital2/xen-api"
+        dest: "{{ xenapi.location }}/source"
+        version: dev
+
+    - name: Changing perm of scripts folder, adding "+x"
+      file: 
+        dest: "{{ xenapi.location }}/source/xen-api/scripts"
+        mode: +x
+        state: directory
+        recurse: yes
+
+      notify:
+        - vital_on_xen_start
+        - vital_xen_api

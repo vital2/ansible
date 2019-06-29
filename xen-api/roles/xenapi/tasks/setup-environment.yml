@@ -1,0 +1,81 @@
+---
+- name: Update system, install xen-dep and required packages
+  block:
+    - apt: 
+        update_cache: yes
+
+    - apt:
+        pkg: "{{ item }}"
+        state: present
+      with_items:
+        - bridge-utils
+        - vlan
+        - qemu-utils
+        - python2.7
+        - glusterfs-client
+        - python-pip
+        - postgresql-client
+        - libpq-dev
+
+    - name: Installing Python Packages to global packages
+      pip: 
+        name: "{{ item }}"
+      with_items:
+        - virtualenv
+        - virtualenvwrapper
+
+    - name: Ensure virtualenv is sourced from the .bashrc
+      blockinfile:
+        dest: ".bashrc"
+        block: |
+          export WORKON_HOME=~/.virtualenvs
+          source /usr/local/bin/virtualenvwrapper.sh
+        marker: '# {mark} ANSIBLE MANAGED BLOCK - virtualenv'
+        insertbefore: BOF
+        create: yes
+
+    - name: Install requirements to virtual environment
+      pip: 
+        name: "{{ item }}"          
+        virtualenv: /root/.virtualenvs/vital
+        virtualenv_python: python2
+      with_items:
+        - psycopg2
+        - pyxs
+        - pyzmq
+
+    - name: Create directory
+      file:
+        path: /mnt/vlab-datastore
+        state: directory
+
+    - name: Create user
+      user:
+       name: "{{ xenapi.user }}"
+       password: '$6$RMpmFpfbGGlsGP$Wdh9tNI0LYc84KgNWx9XDG2eEiIodn4FOGbLmL7jczMeDeaRZHvVwSjtshd6/tf.J52n8fbf6qZYT076Z3Jpz1'
+       groups: sudo
+       state: present
+       shell: /bin/bash
+       system: no
+       createhome: yes
+       home: "/home/{{ xenapi.user }}"
+    
+    - name: Mount Gluster File System
+      mount:
+        path: /mnt/vlab-datastore
+        src: Vlab-gluster1:/vlab
+        fstype: glusterfs
+        opts: defaults,_netdev
+        state: present
+
+    - name: Copy Vital On Start Service
+      copy:
+        src: vital_on_xen_start.service
+        dest: /etc/systemd/system/vital_on_xen_start.service
+
+    - name: Copy Xen API Service
+      copy:
+        src: vital_xen_api.service
+        dest: /etc/systemd/system/vital_xen_api.service
+ 
+  become: true      
