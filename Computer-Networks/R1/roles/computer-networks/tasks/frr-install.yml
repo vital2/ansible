@@ -1,4 +1,8 @@
 ---
+vars:
+  frr:
+  location: "$HOME/frr"
+  user: "student"
 - name: download source of frr
   git:
     repo: "https://github.com/FRRouting/frr.git"
