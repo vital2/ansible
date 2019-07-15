@@ -68,6 +68,7 @@
         - bind9
         - dnsutils
         - net-tools
+        - traceroute
 
       notify: Enable lightdm
   become: true        
