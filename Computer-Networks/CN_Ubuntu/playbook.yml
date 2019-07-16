@@ -1,5 +1,9 @@
 ---
 - hosts: cn-ubuntu
+  vars:
+    frr:
+      location: "$HOME/frr"
+      user: "student"
   gather_facts: no
   roles:
     - computer-networks
