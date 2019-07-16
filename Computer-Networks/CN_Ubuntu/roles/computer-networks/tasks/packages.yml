@@ -65,6 +65,9 @@
         - python-ipaddr 
         - python3-sphinx
         - install-info
+        - bind9
+        - net-tools
+        - traceroute
 
       notify: Enable lightdm
   become: true        
