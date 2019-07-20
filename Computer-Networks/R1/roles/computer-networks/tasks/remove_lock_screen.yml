@@ -1,0 +1,5 @@
+---
+- name: remove blackout
+  shell: gsettings set org.gnome.desktop.session idle-delay 0
+- name: remove lockscreen
+  shell: gsettings set org.gnome.desktop.screensaver lock-enabled false
