@@ -2,4 +2,3 @@
 - include_tasks: packages.yml
 - include_tasks: frr-install.yml
 - include_tasks: copy_files.yml
-- include_tasks: remove_lock_screen.yml

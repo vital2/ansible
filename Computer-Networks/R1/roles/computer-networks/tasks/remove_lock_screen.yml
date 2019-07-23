@@ -1,9 +1,0 @@
----
-- name: remove blackout
-  shell: gsettings set org.gnome.desktop.session idle-delay 0
-  become: yes
-  become_user: student
-- name: remove lockscreen
-  shell: gsettings set org.gnome.desktop.screensaver lock-enabled false
-  become: yes
-  become_user: student
