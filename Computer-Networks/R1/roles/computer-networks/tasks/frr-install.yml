@@ -3,7 +3,7 @@
   git:
     repo: "https://github.com/FRRouting/frr.git"
     dest: "{{ frr.location }}"
-    version: stable/7.1
+    version: stable/7.0
  
 - name: Build FRR
   become: true
