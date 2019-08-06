@@ -33,7 +33,6 @@
          - libjson-c-dev
          - libpam0g-dev
          - libpcre3-dev
-         - libpr
          - libprotobuf-c-dev
          - libpython-dev
          - libreadline-dev
