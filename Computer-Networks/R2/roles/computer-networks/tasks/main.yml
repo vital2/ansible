@@ -1,4 +1,5 @@
 ---
 - include_tasks: packages.yml
+- include_tasks: configure-libyang.yml
 - include_tasks: frr-install.yml
 - include_tasks: copy_files.yml
