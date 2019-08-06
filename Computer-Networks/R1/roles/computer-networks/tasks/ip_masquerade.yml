@@ -6,27 +6,8 @@
     jump: MASQUERADE
     destination: 128.238.77.36
     out_interface: eth0
+  become: yes
 
 - name: save ip masquerade rules
   become: yes
-  shell: sudo iptables-save | tee /etc/iptables.conf
-
-- name: Create rc0.local persistent
-  become: yes
-  block:
-    - name: Create the file
-      file:
-        path: "/etc/rc.local"
-        state: touch
-    
-    - name: Writing to the local file
-      shell: sudo echo "" > /etc/rc.local
-    
-    - name: Writing the conf to the file
-      shell: sudo echo "iptables-restore < /etc/iptables.conf" >> /etc/rc.local
-    
-    - name: Writing the end to the file
-      shell: sudo echo "exit 0" >> /etc/rc.local    
-    
-    - name: Changing ownership
-      shell: chmod +x /etc/rc.local
+  shell: sudo iptables-save | tee /etc/iptables/rules.v4

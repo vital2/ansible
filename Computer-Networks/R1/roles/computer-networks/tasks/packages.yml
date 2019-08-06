@@ -28,6 +28,7 @@
          - iperf
          - iperf3
          - iptables
+         - iptables-persistent
          - isc-dhcp-server
          - libc-ares-dev
          - libjson-c-dev
