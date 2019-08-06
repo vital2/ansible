@@ -2,8 +2,8 @@
 - name: add ip masquerade rules
   become: yes
   shell: /
-    iptables -t nat -A POSTROUTING -o eth0 -d 128.238.77.36 -j MASQUERADE
-    iptables-save| tee /etc/iptables.conf
+    sudo iptables -t nat -A POSTROUTING -o eth0 -d 128.238.77.36 -j MASQUERADE
+    sudo iptables-save| tee /etc/iptables.conf
 
 - name: Create rc0.local persistent
   become: yes
