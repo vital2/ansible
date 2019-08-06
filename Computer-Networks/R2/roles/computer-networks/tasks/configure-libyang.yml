@@ -2,7 +2,7 @@
 - name: download source of libyang.yml
   git:
     repo: "https://github.com/CESNET/libyang.git"
-    dest: "$HOME/"
+    dest: "$HOME/Desktop/"
 
 - name: build libyang.yml
   become: yes
