@@ -14,10 +14,13 @@
         state: touch
     
     - name: Writing to the local file
-      shell: /
-        echo "" > /etc/rc.local
-        echo "iptables-restore < /etc/iptables.conf" >> /etc/rc.local
-        echo "exit 0" >> /etc/rc.local
+      shell: sudo echo "" > /etc/rc.local
+    
+    - name: Writing the conf to the file
+      shell: sudo echo "iptables-restore < /etc/iptables.conf" >> /etc/rc.local
+    
+    - name: Writing the end to the file
+      shell: sudo echo "exit 0" >> /etc/rc.local    
     
     - name: Changing ownership
       shell: chmod +x /etc/rc.local
