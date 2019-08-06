@@ -4,6 +4,10 @@
     frr:
       location: "$HOME/frr"
       user: "student"
+    libyang:
+      location: "$HOME/libyang"
+      user: "student"
   gather_facts: no
   roles:
     - computer-networks
+

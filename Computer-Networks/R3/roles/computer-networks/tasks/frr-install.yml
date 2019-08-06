@@ -3,7 +3,7 @@
   git:
     repo: "https://github.com/FRRouting/frr.git"
     dest: "{{ frr.location }}"
-    version: stable/5.0
+    version: stable/7.1
  
 - name: Build FRR
   become: true
@@ -33,7 +33,7 @@
       make:
         chdir: "/home/{{ frr.user }}/frr" 
         target: check
-       
+
     - name: make install
       make:
         chdir: "/home/{{ frr.user }}/frr" 
