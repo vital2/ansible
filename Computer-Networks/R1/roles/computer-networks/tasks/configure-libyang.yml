@@ -7,7 +7,7 @@
 - name: build libyang.yml
   become: yes
   shell: |
-        cd libyang
+        cd "{{ libyang.location }}"
         mkdir build
         cd build
         cmake -DENABLE_LYD_PRIV=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr -D CMAKE_BUILD_TYPE:String="Release" -DENABLE_CACHE=OFF ..
