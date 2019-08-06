@@ -9,7 +9,9 @@
   become: yes
   block:
     - name: Create the file
-      shell: touch /etc/rc.local
+      file:
+        path: "/etc/rc.local"
+        state: touch
     
     - name: Writing to the local file
       shell: /
