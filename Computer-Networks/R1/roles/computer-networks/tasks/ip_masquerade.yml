@@ -1,0 +1,13 @@
+---
+- name: Add postrouting Iptables rules
+  iptables:
+    table: nat
+    chain: POSTROUTING
+    jump: MASQUERADE
+    destination: 128.238.77.36
+    out_interface: eth0
+  become: yes
+
+- name: save ip masquerade rules
+  become: yes
+  shell: sudo iptables-save | tee /etc/iptables/rules.v4

@@ -1,0 +1,19 @@
+---
+- name: download source of libyang.yml
+  git:
+    repo: "https://github.com/CESNET/libyang.git"
+    dest: "{{ libyang.location }}"
+
+- name: build libyang.yml
+  become: yes
+  shell: |
+        cd "{{ libyang.location }}"
+        mkdir build
+        cd build
+        cmake -DENABLE_LYD_PRIV=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr -D CMAKE_BUILD_TYPE:String="Release" -DENABLE_CACHE=OFF ..
+        make
+        sudo make install
+
+
+
+
