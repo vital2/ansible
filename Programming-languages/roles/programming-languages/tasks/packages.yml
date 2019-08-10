@@ -54,8 +54,7 @@
         - ghc-mod-el 
         - haskell-doc 
         - haskell98-report 
-        - haskell98-tutorial 
-        - hugs
+        - haskell98-tutorial
         - clojure1.6
         - smlnj 
         - smlnj-doc 
@@ -64,13 +63,19 @@
         - aspectj-doc 
         - aspectc++
 
-    - name: Purge Openbox
-      apt:
-        pkg: openbox
-        state: absent
-        purge: yes
+    - name: Install Rust
+      shell: curl -sf -L -y https://static.rust-lang.org/rustup.sh | sh
 
-    - name: Remove openbox.desktop file
-      file:
-         state: absent
-         path: /usr/share/xsessions/openbox.desktop    
+    - name: Install Pharo
+      shell: curl -L https://get.pharo.org/64/ | bash
+
+#    - name: Purge Openbox
+#      apt:
+#        pkg: openbox
+#        state: absent
+#        purge: yes
+#
+#    - name: Remove openbox.desktop file
+#      file:
+#         state: absent
+#         path: /usr/share/xsessions/openbox.desktop
