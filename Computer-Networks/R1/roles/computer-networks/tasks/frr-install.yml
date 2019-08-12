@@ -6,7 +6,7 @@
     version: stable/7.1
  
 - name: Build FRR
-  become: true
+  become: yes
   block:
     - name: Add frr groups and user
       shell: |
@@ -84,6 +84,15 @@
         path: /etc/frr/daemons
         regexp: 'zebra=no'
         replace: 'zebra=yes'
+
+    - name: Enable zebra
+      shell: /
+        echo "zebra=yes" >> /etc/frr/daemons
+        systemctl restart frr
+        systemctl enable frr
+        systemctl reload frr
+
+
 
       notify:
         - frr
