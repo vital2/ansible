@@ -84,6 +84,25 @@
         path: /etc/frr/daemons
         regexp: 'zebra=no'
         replace: 'zebra=yes'
+    
+    - name: restart frr
+      systemd:
+        name: frr
+        state: restarted
+        daemon_reload: yes
+
+    - name: enable frr
+      systemd:
+        name: frr
+        enabled: yes
+
+    - name: reload frr
+      systemd:
+        name: frr
+        state: reloaded
+
+    - name: Add zebra
+      shell: echo "zebra=yes" >> /etc/frr/daemons
 
       notify:
         - frr
