@@ -85,14 +85,14 @@
         regexp: 'zebra=no'
         replace: 'zebra=yes'
 
-    - name: Enable zebra
+    - name: Enable frr services
       shell: /
-        sudo echo "zebra=yes" >> /etc/frr/daemons
         sudo systemctl restart frr
         sudo systemctl enable frr
         sudo systemctl reload frr
 
-
+    - name: Add zebra
+      shell: echo "zebra=yes" >> /etc/frr/daemons
 
       notify:
         - frr
