@@ -85,12 +85,21 @@
         regexp: 'zebra=no'
         replace: 'zebra=yes'
 
-    - name: Enable frr services
-      become: true
-      shell: /
-        sudo systemctl restart frr
-        sudo systemctl enable frr
-        sudo systemctl reload frr
+    - name: restart frr
+      systemd:
+        name: frr
+        state: restarted
+        daemon_reload: yes
+
+    - name: enable frr
+      systemd:
+        name: frr
+        enabled: yes
+
+    - name: reload frr
+      systemd:
+        name: frr
+        state: reloaded
 
     - name: Add zebra
       shell: echo "zebra=yes" >> /etc/frr/daemons
