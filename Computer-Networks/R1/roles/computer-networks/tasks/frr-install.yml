@@ -86,6 +86,7 @@
         replace: 'zebra=yes'
 
     - name: Enable frr services
+      become: true
       shell: /
         sudo systemctl restart frr
         sudo systemctl enable frr
